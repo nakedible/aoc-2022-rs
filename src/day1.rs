@@ -1,6 +1,21 @@
 use test_case::test_case;
 
-#[test_case("inputs/input-01" => matches Ok(123))]
+fn parse_input(filename: &str) -> Result<Vec<Vec<u64>>, std::io::Error> {
+    let input = std::fs::read_to_string(filename)?;
+    let lines: Vec<&str> = input.lines().collect();
+    let elves: Vec<Vec<u64>> = lines
+        .split(|&x| x == "")
+        .map(|x| {
+            x.iter()
+                .map(|y| y.parse::<u64>().expect("invalid number"))
+                .collect()
+        })
+        .collect();
+    Ok(elves)
+}
+
+#[test_case("inputs/input-01" => matches Ok(68442))]
 pub fn puzzle1(filename: &str) -> Result<u64, std::io::Error> {
-    Ok(0)
+    let elves = parse_input(filename)?;
+    Ok(elves.iter().map(|elf| elf.iter().sum()).max().unwrap())
 }
