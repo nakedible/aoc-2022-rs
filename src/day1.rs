@@ -4,7 +4,7 @@ fn parse_input(filename: &str) -> Result<Vec<Vec<u64>>, std::io::Error> {
     let input = std::fs::read_to_string(filename)?;
     let lines: Vec<&str> = input.lines().collect();
     let elves: Vec<Vec<u64>> = lines
-        .split(|&x| x == "")
+        .split(|&x| x.is_empty())
         .map(|x| {
             x.iter()
                 .map(|y| y.parse::<u64>().expect("invalid number"))
