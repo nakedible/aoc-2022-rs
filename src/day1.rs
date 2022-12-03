@@ -19,3 +19,11 @@ pub fn puzzle1(filename: &str) -> Result<u64, std::io::Error> {
     let elves = parse_input(filename)?;
     Ok(elves.iter().map(|elf| elf.iter().sum()).max().unwrap())
 }
+
+#[test_case("inputs/input-01" => matches Ok(204837))]
+pub fn puzzle2(filename: &str) -> Result<u64, std::io::Error> {
+    let elves = parse_input(filename)?;
+    let mut sums: Vec<u64> = elves.iter().map(|elf| elf.iter().sum()).collect();
+    sums.sort();
+    Ok(sums.iter().rev().take(3).sum())
+}
