@@ -49,7 +49,7 @@ fn parse_input(filename: &str) -> Result<(Vec<Vec<char>>, Vec<Move>), std::io::E
     Ok((stacks, moves))
 }
 
-fn do_move(stacks: &mut Vec<Vec<char>>, action: &Move) {
+fn do_move(stacks: &mut [Vec<char>], action: &Move) {
     for _idx in 0..(action.count) {
         let elem = stacks[action.from - 1].pop().unwrap();
         stacks[action.to - 1].push(elem);
@@ -66,9 +66,11 @@ pub fn puzzle1(filename: &str) -> Result<String, std::io::Error> {
     Ok(ret)
 }
 
-fn do_move_stack(stacks: &mut Vec<Vec<char>>, action: &Move) {
+fn do_move_stack(stacks: &mut [Vec<char>], action: &Move) {
     let fromlast = stacks[action.from - 1].len();
-    let tail: Vec<char> = stacks[action.from - 1].drain((fromlast - (action.count as usize))..fromlast).collect();
+    let tail: Vec<char> = stacks[action.from - 1]
+        .drain((fromlast - (action.count as usize))..fromlast)
+        .collect();
     stacks[action.to - 1].extend(tail);
 }
 
