@@ -9,7 +9,7 @@ pub fn parse_input(filename: &str) -> Result<BTreeMap<String, u64>, std::io::Err
     for line in input.lines() {
         if let Some(d) = line.strip_prefix("$ cd ") {
             if d == ".." {
-                // nnngh, canonicalize is nightly
+                // nnngh, absolute is nightly
                 curpath.pop();
             } else {
                 curpath.push(d);
