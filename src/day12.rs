@@ -41,15 +41,23 @@ fn find_path_len<const XSIZE: usize, const YSIZE: usize>(
     let ret = astar(
         &start,
         |p| {
-            //dbg!(p);
             let mut ret = Vec::new();
+            if p.x == 255 && p.y == 255 {
+                for y in 0..YSIZE {
+                    for x in 0..XSIZE {
+                        if input[y][x] == 1 {
+                            ret.push((Coords { x, y}, 1));
+                        }
+                    }
+                }
+                return ret;
+            }
             for (a, b) in vec![(-1, 0), (1, 0), (0, -1), (0, 1)].into_iter() {
                 let dx = p.x as i64 + a;
                 let dy = p.y as i64 + b;
                 if dx < 0 || dx >= XSIZE as i64 || dy < 0 || dy >= YSIZE as i64 {
                     continue;
                 }
-                //dbg!(dx, dy, input[dy as usize][dx as usize]);
                 if (input[p.y][p.x] + 1) < input[dy as usize][dx as usize] {
                     continue;
                 }
@@ -86,16 +94,5 @@ pub fn puzzle2(filename: &str) -> Result<usize, std::io::Error> {
     const XSIZE: usize = 181;
     const YSIZE: usize = 41;
     let (input, _start, end) = parse_input::<XSIZE, YSIZE>(filename)?;
-    let mut lengths = Vec::new();
-    for y in 0..YSIZE {
-        for x in 0..XSIZE {
-            if input[y][x] == 1 {
-                let pathlen = find_path_len(input, Coords { x, y }, end);
-                if let Some(pathlen) = pathlen {
-                    lengths.push(pathlen);
-                }
-            }
-        }
-    }
-    Ok(*lengths.iter().min().unwrap())
+    Ok(find_path_len(input, Coords { x: 255, y: 255 }, end).unwrap() - 1)
 }
