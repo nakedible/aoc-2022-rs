@@ -33,6 +33,7 @@ fn parse_input<const XSIZE: usize, const YSIZE: usize>(
     Ok((ret, start.unwrap(), end.unwrap()))
 }
 
+#[allow(clippy::needless_range_loop)]
 fn find_path_len<const XSIZE: usize, const YSIZE: usize>(
     input: [[u8; XSIZE]; YSIZE],
     start: Coords,
@@ -46,7 +47,7 @@ fn find_path_len<const XSIZE: usize, const YSIZE: usize>(
                 for y in 0..YSIZE {
                     for x in 0..XSIZE {
                         if input[y][x] == 1 {
-                            ret.push((Coords { x, y}, 1));
+                            ret.push((Coords { x, y }, 1));
                         }
                     }
                 }
