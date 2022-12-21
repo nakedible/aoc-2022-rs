@@ -4,7 +4,6 @@ pub mod day11;
 pub mod day12;
 pub mod day13;
 pub mod day14;
-#[allow(clippy::all)]
 pub mod day15;
 pub mod day18;
 pub mod day2;
