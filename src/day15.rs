@@ -58,42 +58,8 @@ pub fn puzzle1(filename: &str, desired_line: i64) -> Result<i64, std::io::Error>
     Ok(count)
 }
 
-// fn draw_map(input: &Vec<((i64, i64), (i64, i64))>) {
-//     let mut map = [['.'; 26]; 26];
-//     for y in 0..=25 {
-//         let spans = build_spans(input, y);
-//         let mut nest = 0;
-//         let mut last_x = 0;
-//         for (x, is_end) in spans {
-//             if nest > 0 {
-//                 for cur_x in last_x..=x {
-//                     if cur_x >= 0 && cur_x <= 25 {
-//                         map[y as usize][cur_x as usize] = '#';
-//                     }
-//                 }
-//             }
-//             if is_end {
-//                 nest -= 1;
-//             } else {
-//                 nest += 1;
-//             }
-//             last_x = x;
-//         }
-//     }
-//     for ((sx, sy), (bx, by)) in input {
-//         if *sx >= 0 && *sx <= 25 {
-//             map[*sy as usize][*sx as usize] = 'S';
-//         }
-//         if *bx >= 0 && *bx <= 25 {
-//             map[*by as usize][*bx as usize] = 'B';
-//         }
-//     }
-//     map.iter()
-//         .for_each(|l| println!("{}", l.iter().collect::<String>()));
-// }
-
 #[test_case("inputs/example-15", 20 => matches Ok(56000011))]
-#[test_case("inputs/input-15", 4000000 => matches Ok(0))]
+#[test_case("inputs/input-15", 4000000 => matches Ok(13734006908372))]
 pub fn puzzle2(filename: &str, max_coord: i64) -> Result<i64, std::io::Error> {
     let input = parse_input(filename)?;
     //draw_map(&input);
