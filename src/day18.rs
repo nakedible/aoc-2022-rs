@@ -46,7 +46,7 @@ fn flood_fill(grid: &mut [[[u8; 32]; 32]; 32]) {
     let mut todo = Vec::new();
     todo.push((1, 1, 1));
     while let Some((x, y, z)) = todo.pop() {
-        if z >= 1 && z < 32 && y >= 1 && y < 32 && x >= 1 && x < 32 && grid[z][y][x] == 0 {
+        if (1..32).contains(&z) && (1..32).contains(&y) && (1..32).contains(&x) && grid[z][y][x] == 0 {
             grid[z][y][x] = 2;
             todo.push((x + 1, y, z));
             todo.push((x - 1, y, z));
