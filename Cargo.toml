@@ -12,6 +12,6 @@ opt-level = 3
 debug = true
 
 [dependencies]
-pathfinding = "4"
+pathfinding = "4.1"
 serde_json = "1"
-test-case = "2"
+test-case = "2.2"
